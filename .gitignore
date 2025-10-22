@@ -19,8 +19,11 @@ reports/
 backups/
 tmp/
 data/raw/
-data/processed/
+data/processed/*
 !data/processed/.gitkeep
+
+# Environment
+.env
 
 # OS
 .DS_Store
