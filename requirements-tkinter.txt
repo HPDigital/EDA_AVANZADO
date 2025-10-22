@@ -1,0 +1,42 @@
+# CAF Dashboard - Dependencias para versión Tkinter
+# Análisis de datos
+pandas>=2.2.0
+numpy>=1.26.4
+scipy>=1.13.0
+scikit-learn>=1.5.0
+
+# Visualización (solo Matplotlib/Seaborn para Tkinter)
+matplotlib>=3.8.0
+seaborn>=0.13.0
+
+# Dependencias para múltiples formatos de archivos
+openpyxl>=3.1.0  # Excel (.xlsx)
+xlrd>=2.0.1      # Excel (.xls)
+pyarrow>=14.0.0  # Parquet, Feather
+fastparquet>=2024.2.0  # Parquet alternativo
+chardet>=5.2.0   # Detección de codificación
+lxml>=4.9.0      # XML parsing
+html5lib>=1.1    # HTML parsing
+
+# Dependencias opcionales para análisis estadístico avanzado
+statsmodels>=0.14.0
+pingouin>=0.5.3
+dcor>=0.5.3
+umap-learn>=0.5.3
+networkx>=3.0
+ruptures>=1.1.5
+prophet>=1.1.7   # Requiere build tools en Windows
+shap>=0.49.0     # Requiere compiladores en algunas plataformas
+prince>=0.6.0
+
+# Tkinter ya viene incluido con Python
+# No se necesita instalación adicional de tkinter
+
+# Para desarrollo y testing
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0
+
+# Utilidades
+python-dotenv>=1.0.0
+

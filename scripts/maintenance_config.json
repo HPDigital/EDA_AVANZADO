@@ -1,0 +1,112 @@
+{
+  "maintenance_schedules": {
+    "quick": {
+      "description": "Verificación rápida del sistema",
+      "scripts": ["diagnose", "test"],
+      "frequency": "cada 6 horas",
+      "cron_expression": "0 */6 * * *"
+    },
+    "standard": {
+      "description": "Mantenimiento estándar diario",
+      "scripts": ["diagnose", "optimize", "test", "backup"],
+      "frequency": "diario",
+      "cron_expression": "0 2 * * *"
+    },
+    "full": {
+      "description": "Mantenimiento completo semanal",
+      "scripts": ["diagnose", "optimize", "test", "backup", "performance", "logs"],
+      "frequency": "semanal",
+      "cron_expression": "0 1 * * 0"
+    },
+    "emergency": {
+      "description": "Mantenimiento de emergencia",
+      "scripts": ["diagnose", "backup", "test"],
+      "frequency": "manual",
+      "cron_expression": null
+    }
+  },
+  "script_configurations": {
+    "diagnose_system.py": {
+      "timeout": 300,
+      "critical": true,
+      "retry_on_failure": false,
+      "dependencies": []
+    },
+    "optimize_system.py": {
+      "timeout": 600,
+      "critical": false,
+      "retry_on_failure": true,
+      "dependencies": ["diagnose_system.py"]
+    },
+    "test_system.py": {
+      "timeout": 300,
+      "critical": true,
+      "retry_on_failure": true,
+      "dependencies": ["diagnose_system.py"]
+    },
+    "backup_system.py": {
+      "timeout": 900,
+      "critical": true,
+      "retry_on_failure": false,
+      "dependencies": []
+    },
+    "performance_monitor.py": {
+      "timeout": 60,
+      "critical": false,
+      "retry_on_failure": false,
+      "dependencies": []
+    },
+    "log_monitor.py": {
+      "timeout": 120,
+      "critical": false,
+      "retry_on_failure": false,
+      "dependencies": []
+    },
+    "update_system.py": {
+      "timeout": 1800,
+      "critical": false,
+      "retry_on_failure": true,
+      "dependencies": ["backup_system.py"]
+    }
+  },
+  "alert_thresholds": {
+    "disk_usage_percent": 90,
+    "memory_usage_percent": 80,
+    "cpu_usage_percent": 90,
+    "log_file_size_mb": 100,
+    "backup_age_days": 7,
+    "test_failure_rate": 0.1
+  },
+  "notification_settings": {
+    "email_enabled": false,
+    "email_smtp_server": "",
+    "email_smtp_port": 587,
+    "email_username": "",
+    "email_password": "",
+    "email_recipients": [],
+    "slack_enabled": false,
+    "slack_webhook_url": "",
+    "console_notifications": true
+  },
+  "backup_settings": {
+    "max_backups": 10,
+    "backup_retention_days": 30,
+    "compress_backups": true,
+    "include_data": true,
+    "include_logs": true,
+    "include_config": true
+  },
+  "performance_settings": {
+    "monitor_interval_seconds": 30,
+    "max_memory_usage_mb": 2048,
+    "max_cpu_usage_percent": 80,
+    "log_rotation_size_mb": 10,
+    "log_rotation_count": 5
+  },
+  "maintenance_windows": {
+    "allowed_hours": [1, 2, 3, 4, 5],
+    "timezone": "UTC",
+    "skip_weekends": false,
+    "skip_holidays": true
+  }
+}
